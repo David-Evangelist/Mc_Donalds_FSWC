@@ -19,7 +19,7 @@ const ProductPage = async ({params}: ProductPageProps) => {
     }
 
     return ( 
-        <div className="">
+        <div >
 
             <ProductHeader product={product}/>
 
