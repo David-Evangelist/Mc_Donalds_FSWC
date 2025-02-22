@@ -58,7 +58,6 @@ const RestaurantPage = async ({ params }: RestaurantPageProps) => {
           imageUrl="/takeaway.png"
           option="TAKEAWAY"
           slug={slug}
-
         />
       </div>
     </div>

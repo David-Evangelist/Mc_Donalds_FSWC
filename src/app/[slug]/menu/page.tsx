@@ -28,11 +28,12 @@ const RestaurantMenuPage = async ({
   const restaurant = await db.restaurant.findUnique({
     where: {
       slug,
-    }, include: {
+    },
+    include: {
       menuCategories: {
-        include: {products: true},
-      }, 
-    }
+        include: { products: true },
+      },
+    },
   });
 
   if (!restaurant) {
@@ -43,7 +44,7 @@ const RestaurantMenuPage = async ({
     <div>
       <RestaurantHeader restaurant={restaurant} />
 
-      <RestaurnatCategories restaurant={restaurant}/>
+      <RestaurnatCategories restaurant={restaurant} />
     </div>
   );
 };
