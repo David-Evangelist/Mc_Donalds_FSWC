@@ -13,9 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//Na modelagem do BD o lado n é o lado que possui a chave estrangeira
-//O lado 1 é o lado que possui a chave primária
-
 model Restaurant {
   id             String         @id @default(uuid())
   name           String
@@ -33,7 +30,7 @@ model Restaurant {
 model MenuCategory {
   id           String     @id @default(uuid())
   name         String
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade) //Serve para informar que o campo restaurantId é uma chave estrangeira
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
   restaurantId String
   products     Product[]
   createdAt    DateTime   @default(now())
@@ -49,9 +46,9 @@ model Product {
   ingredients    String[]
   orderProducts  OrderProduct[]
   restaurant     Restaurant     @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-  restaurantId   String //Chave estrangeira
+  restaurantId   String
   menuCategory   MenuCategory   @relation(fields: [menuCategoryId], references: [id], onDelete: Cascade)
-  menuCategoryId String //Chave estrangeira
+  menuCategoryId String
   createdAt      DateTime       @default(now())
   updatedAt      DateTime       @updatedAt
 }
@@ -62,8 +59,10 @@ model Order {
   status            OrderStatus
   consumptionMethod ConsumptionMethod
   restaurant        Restaurant        @relation(fields: [restaurantId], references: [id], onDelete: Cascade)
-  restaurantId      String //Chave estrangeira
+  restaurantId      String
   orderProducts     OrderProduct[]
+  customerName      String
+  customerCpf       String
   createdAt         DateTime          @default(now())
   updatedAt         DateTime          @updatedAt
 }
@@ -71,16 +70,15 @@ model Order {
 model OrderProduct {
   id        String   @id @default(uuid())
   product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
-  productId String //Chave estrangeira
+  productId String
   order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  orderId   Int //Chave estrangeira
+  orderId   Int
   quantity  Int
   price     Float
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
-//enum é um tipo de dado que pode ter um valor de um conjunto de valores especificados
 enum OrderStatus {
   PENDING
   IN_PREPARATION
