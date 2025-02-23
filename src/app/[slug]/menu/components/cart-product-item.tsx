@@ -16,7 +16,7 @@ const CartProductItem = ({ product }: CartProductItemProps) => {
     useContext(CartContext);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex items-center justify-between mt-2">
       {/* ESQUERDA */}
       <div className="flex items-center gap-3">
         <div className="relative h-20 w-20 rounded-lg bg-gray-200">
