@@ -1,5 +1,7 @@
+import { redirect } from "next/navigation";
+
 const Home = () => {
-  return <h1>HELLO WORLD!</h1>;
+  redirect("/fsw-donalds")
 };
 
 export default Home;
